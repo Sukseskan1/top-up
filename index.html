@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InnGame - Top Up Game</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg: #111;
+        --text: #fff;
+        --primary: #4da3ff;
+        --card: #222;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      header {
+        background-color: var(--primary);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+      }
+
+      .logo {
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      nav a {
+        margin: 0 10px;
+        color: white;
+        text-decoration: none;
+      }
+
+      .toggle-theme {
+        font-size: 1.2rem;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+
+      .slider {
+        position: relative;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .carousel img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .slider-text {
+        position: absolute;
+        z-index: 1;
+        color: white;
+      }
+
+      .slider-text h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .slider-text p {
+        font-size: 1.2rem;
+        color: #ccc;
+      }
+
+      .slider .button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: yellow;
+        color: black;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+      }
+
+      .categories {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 20px 0;
+      }
+
+      .categories div {
+        margin: 10px 15px;
+        cursor: pointer;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .categories i {
+        font-size: 1.2rem;
+        color: var(--primary);
+      }
+
+      .game-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 20px;
+        padding: 0 20px 40px;
+      }
+
+      .game-item {
+        background-color: var(--card);
+        padding: 10px;
+        text-align: center;
+        border-radius: 10px;
+        transition: background-color 0.3s ease;
+      }
+
+      .game-item img {
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      .game-item p {
+        margin-top: 10px;
+        font-size: 0.9rem;
+      }
+
+      .notif {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background-color: var(--primary);
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        z-index: 1000;
+      }
+
+      @media (max-width: 768px) {
+        .categories {
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+
+        .categories div {
+          display: inline-block;
+        }
+
+        .slider-text h1 {
+          font-size: 1.6rem;
+        }
+
+        .slider-text p {
+          font-size: 1rem;
+        }
+
+        .slider {
+          height: 220px;
+        }
+
+        .carousel img {
+          height: 220px;
+        }
+      }
+
+      body.light {
+        --bg: #f9f9f9;
+        --text: #111;
+        --primary: #4da3ff;
+        --card: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">InnGame</div>
+      <nav>
+        <a href="#">Beranda</a>
+        <a href="#">Saldo</a>
+        <a href="#">Riwayat</a>
+        <a href="#">Blog</a>
+        <a href="#">Profile</a>
+      </nav>
+      <div class="toggle-theme" id="toggle-theme" title="Ganti tema">🌙</div>
+    </header>
+
+    <section class="slider">
+      <div class="carousel">
+        <img id="slide" src="images/slide-1ml.jpg" alt="Slider" />
+      </div>
+      <div class="slider-text">
+        <p>Pilih nominal - Lakukan pembayaran - Push rank lanjut terus</p>
+        <button class="button">Games Pedia Shop</button>
+      </div>
+    </section>
+
+    <section class="categories">
+      <div><i class="fas fa-gamepad"></i> GAME</div>
+      <div><i class="fas fa-mobile-alt"></i> PULSA</div>
+      <div><i class="fas fa-wallet"></i> EMONEY</div>
+      <div><i class="fas fa-users"></i> SOCIAL</div>
+      <div><i class="fas fa-chess-knight"></i> JASA JOKI</div>
+      <div><i class="fas fa-file-invoice-dollar"></i> PASCABAYAR</div>
+    </section>
+
+    <section class="game-list">
+      <div class="game-item">
+        <img
+          src="https://cdn.cloudflare.steamstatic.com/steam/apps/1451540/header.jpg"
+          alt="Ace Racer"
+        />
+        <p>Ace Racer</p>
+      </div>
+      <div class="game-item">
+        <img src="images/arena-of-valor1_large.jpg" alt="Arena of Valor" />
+        <p>Arena of Valor</p>
+      </div>
+      <div class="game-item">
+        <img src="images/mlbb.jpg" alt="MOBILE LEGEND" />
+        <p>MOBILE LEGEND</p>
+      </div>
+      <div class="game-item">
+        <img src="images/honor of kings.jpg" alt="HONOR OF KINGS" />
+        <p>HONOR OF KINGS</p>
+      </div>
+      <div class="game-item">
+        <img src="images/GenshinImpact.jpg" alt="GENSHIN IMPACT" />
+        <p>GENSHIN IMPACT</p>
+      </div>
+      <div class="game-item">
+        <img src="images/valorant.jpg" alt="VALORANT" />
+        <p>VALORANT</p>
+      </div>
+      <div class="game-item">
+        <img src="images/AU.jpeg" alt="AU2 MOBILE" />
+        <p>AU2 MOBILE</p>
+      </div>
+      <div class="game-item">
+        <img src="images/garena_shells.jpg" alt="GARENA" />
+        <p>GARENA</p>
+      </div>
+      <div class="game-item">
+        <img src="images/pubgm.jpg" alt="PUBG MOBILE" />
+        <p>PUBG MOBILE</p>
+      </div>
+      <div class="game-item">
+        <img
+          src="https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg"
+          alt="Call of Duty"
+        />
+        <p>Call of Duty</p>
+      </div>
+      <div class="game-item">
+        <img src="images/ff.png" alt="FREE FIRE" />
+        <p>FREE FIRE</p>
+      </div>
+      <div class="game-item">
+        <img
+          src="images/chimeraland-game-wiki-featured.webp"
+          alt="Chimeraland"
+        />
+        <p>Chimeraland</p>
+      </div>
+    </section>
+
+    <div class="notif"></div>
+
+    <script>
+      // Carousel
+      const slides = [
+        "images/slide-1pubg.jpg",
+        "images/slide-1ff.jpg",
+        "images/slide-1codm.jpg",
+      ];
+      let i = 0;
+      setInterval(() => {
+        i = (i + 1) % slides.length;
+        document.getElementById("slide").src = slides[i];
+      }, 6000);
+
+      // Notifikasi pembelian
+      const notifs = [
+        "081234xxxx baru saja membeli 86 UC",
+        "085643xxxx baru saja membeli 514 Diamonds",
+        "08138467xxx baru saja membeli 31 CP",
+      ];
+      let index = 0;
+      setInterval(() => {
+        document.querySelector(".notif").textContent = notifs[index];
+        index = (index + 1) % notifs.length;
+      }, 5000);
+
+      // Dark/Light Mode Toggle
+      const toggleTheme = document.getElementById("toggle-theme");
+      let isLight = false;
+
+      toggleTheme.addEventListener("click", () => {
+        document.body.classList.toggle("light");
+        isLight = !isLight;
+        toggleTheme.textContent = isLight ? "☀️" : "🌙";
+      });
+    </script>
+  </body>
+</html>
