@@ -34,6 +34,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 10px 20px;
+        position: relative;
       }
 
       .logo {
@@ -41,16 +42,66 @@
         font-size: 1.2rem;
       }
 
+      nav {
+        display: flex;
+        gap: 10px;
+        position: relative;
+      }
+
       nav a {
-        margin: 0 10px;
         color: white;
         text-decoration: none;
+        padding: 8px 12px;
+        position: relative;
+        transition: color 0.3s;
+      }
+
+      nav a.active {
+        color: orange;
+      }
+
+      nav .underline {
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        width: 0;
+        background-color: orange;
+        transition: all 0.3s ease;
       }
 
       .toggle-theme {
         font-size: 1.2rem;
         cursor: pointer;
         margin-left: 10px;
+      }
+
+      .hamburger {
+        display: none;
+        font-size: 1.5rem;
+        color: white;
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          display: none;
+          flex-direction: column;
+          background-color: var(--primary);
+          position: absolute;
+          top: 60px;
+          right: 20px;
+          padding: 10px;
+          border-radius: 8px;
+          z-index: 1000;
+        }
+
+        nav.show {
+          display: flex;
+        }
+
+        .hamburger {
+          display: block;
+        }
       }
 
       .slider {
@@ -191,14 +242,16 @@
   <body>
     <header>
       <div class="logo">InnGame</div>
-      <nav>
-        <a href="#">Beranda</a>
+      <nav id="main-nav">
+        <a href="#" class="active">Beranda</a>
         <a href="#">Saldo</a>
         <a href="#">Riwayat</a>
         <a href="#">Blog</a>
         <a href="#">Profile</a>
+        <span class="underline"></span>
       </nav>
       <div class="toggle-theme" id="toggle-theme" title="Ganti tema">🌙</div>
+      <div class="hamburger" id="hamburger-menu">☰</div>
     </header>
 
     <section class="slider">
@@ -221,63 +274,51 @@
     </section>
 
     <section class="game-list">
+      <!-- Game item bisa kamu tambahkan/ubah sesuai kebutuhan -->
       <div class="game-item">
-        <img
-          src="https://cdn.cloudflare.steamstatic.com/steam/apps/1451540/header.jpg"
-          alt="Ace Racer"
-        />
-        <p>Ace Racer</p>
-      </div>
-      <div class="game-item">
-        <img src="images/arena-of-valor1_large.jpg" alt="Arena of Valor" />
-        <p>Arena of Valor</p>
-      </div>
-      <div class="game-item">
-        <img src="images/mlbb.jpg" alt="MOBILE LEGEND" />
+        <img src="images/mlbb.jpg" alt="MLBB" />
         <p>MOBILE LEGEND</p>
       </div>
       <div class="game-item">
-        <img src="images/honor of kings.jpg" alt="HONOR OF KINGS" />
-        <p>HONOR OF KINGS</p>
+        <img src="images/pubgm.jpg" alt="PUBG" />
+        <p>PUBG MOBILE</p>
       </div>
       <div class="game-item">
-        <img src="images/GenshinImpact.jpg" alt="GENSHIN IMPACT" />
-        <p>GENSHIN IMPACT</p>
+        <img src="images/ff.png" alt="Free Fire" />
+        <p>Free Fire</p>
       </div>
       <div class="game-item">
         <img src="images/valorant.jpg" alt="VALORANT" />
         <p>VALORANT</p>
       </div>
       <div class="game-item">
-        <img src="images/AU.jpeg" alt="AU2 MOBILE" />
-        <p>AU2 MOBILE</p>
+        <img src="images/AU.jpeg" alt="Au2 mobile" />
+        <p>Au2 mobile</p>
       </div>
       <div class="game-item">
-        <img src="images/garena_shells.jpg" alt="GARENA" />
-        <p>GARENA</p>
+        <img src="images/GenshinImpact.jpg" alt="Genshin impact" />
+        <p>Genshin impact</p>
       </div>
       <div class="game-item">
-        <img src="images/pubgm.jpg" alt="PUBG MOBILE" />
-        <p>PUBG MOBILE</p>
-      </div>
-      <div class="game-item">
-        <img
-          src="https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg"
-          alt="Call of Duty"
-        />
-        <p>Call of Duty</p>
-      </div>
-      <div class="game-item">
-        <img src="images/ff.png" alt="FREE FIRE" />
-        <p>FREE FIRE</p>
+        <img src="images/arena-of-valor1_large.jpg" alt="arena-of-valor" />
+        <p>Arena-of-valor</p>
       </div>
       <div class="game-item">
         <img
           src="images/chimeraland-game-wiki-featured.webp"
-          alt="Chimeraland"
+          alt="chimeraland"
         />
-        <p>Chimeraland</p>
+        <p>chimeraland</p>
       </div>
+      <div class="game-item">
+        <img src="images/garena_shells.jpg" alt="Garena" />
+        <p>Garena</p>
+      </div>
+      <div class="game-item">
+        <img src="images/honor of kings.jpg" alt="honor of kings" />
+        <p>Honor of kings</p>
+      </div>
+      <!-- Tambahkan game lainnya -->
     </section>
 
     <div class="notif"></div>
@@ -307,14 +348,45 @@
         index = (index + 1) % notifs.length;
       }, 5000);
 
-      // Dark/Light Mode Toggle
+      // Toggle tema
       const toggleTheme = document.getElementById("toggle-theme");
       let isLight = false;
-
       toggleTheme.addEventListener("click", () => {
         document.body.classList.toggle("light");
         isLight = !isLight;
         toggleTheme.textContent = isLight ? "☀️" : "🌙";
+      });
+
+      // Hamburger menu
+      const hamburger = document.getElementById("hamburger-menu");
+      const nav = document.querySelector("header nav");
+      hamburger.addEventListener("click", () => {
+        nav.classList.toggle("show");
+      });
+
+      // Slide underline animasi nav
+      const navMenu = document.getElementById("main-nav");
+      const navLinks = navMenu.querySelectorAll("a");
+      const underline = navMenu.querySelector(".underline");
+
+      function moveUnderline(el) {
+        const rect = el.getBoundingClientRect();
+        const navRect = navMenu.getBoundingClientRect();
+        underline.style.width = `${rect.width}px`;
+        underline.style.transform = `translateX(${rect.left - navRect.left}px)`;
+      }
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          navLinks.forEach((l) => l.classList.remove("active"));
+          this.classList.add("active");
+          moveUnderline(this);
+        });
+      });
+
+      window.addEventListener("load", () => {
+        const activeLink = document.querySelector("nav a.active");
+        if (activeLink) moveUnderline(activeLink);
       });
     </script>
   </body>
